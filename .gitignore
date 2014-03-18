@@ -1,6 +1,6 @@
-*.class
+target
+test-output
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# IDEA files and directories
+.idea
+out
