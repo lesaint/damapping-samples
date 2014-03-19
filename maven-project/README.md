@@ -3,10 +3,10 @@ DAMapping Sample project : Maven single module
 
 This minimal single module Maven project demos the use of DAMapping.
 
-## Everything is done in pom.xml
+## With Java 7+
 
-To use the class/interface generation feature of DAMApping, one only needs to declare the DAMapping annotation-processor artifact.
-Since Java 1.7, javac compiler is capable of discovering annotation processor in the class path automatically.
+To use DAMapping annotation processing, declaring DAMapping annotation-processor artifact as a direct dependency is enough.
+Since Java 7, javac compiler is capable of discovering annotation processor in the class path automatically (aka. here as autodiscovery).
 
 ```xml
 <dependency>
@@ -18,8 +18,10 @@ Since Java 1.7, javac compiler is capable of discovering annotation processor in
 </dependency>
 ```
 
+## With Java 6 or when autodiscovery is disabled
+
 For the following reasons, it might be necessary to explicitly declare DAMApping annotation processor:
-* module is compiled with Java 1.6
+* module is compiled with Java 6
 * another annotation processor is already declared explicitly in the maven-compiler-plugin
     - declaring explictly annotation processor disables auto discovery
     - so, DAMApping annotation processor has to be declared explicitly as well
