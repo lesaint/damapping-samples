@@ -14,31 +14,25 @@
   </modules>
 
   <properties>
-      <damapping.version>0.2.0-SNAPSHOT</damapping.version>
+    <damapping.version>0.2.0-SNAPSHOT</damapping.version>
 
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
+  <!--Below is the required configuration for Java 7 with automatic discovery of annotations processor-->
+  <!--Please note that DAMapping annotation processor is *not* declared as a dependency of the parent POM-->
   <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>fr.javatronic.damapping</groupId>
-            <artifactId>annotation-processor</artifactId>
-            <version>${damapping.version}</version>
-            <scope>provided</scope>
-        </dependency>
+      <dependency>
+        <groupId>fr.javatronic.damapping</groupId>
+        <artifactId>annotation-processor</artifactId>
+        <version>${damapping.version}</version>
+        <!-- note that the compile scope is the default scope so following tag is optionnal -->
+        <scope>compile</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <dependencies>
-      <!-- declaration of DAMapping annotation processor as a direct dependency is mandatory -->
-      <dependency>
-          <groupId>fr.javatronic.damapping</groupId>
-          <artifactId>annotation-processor</artifactId>
-          <scope>provided</scope>
-      </dependency>
-  </dependencies>
 
   <build>
     <pluginManagement>
@@ -51,15 +45,55 @@
             <source>1.7</source>
             <target>1.7</target>
             <encoding>UTF-8</encoding>
-            <!-- annotationProcessors tag is optionnal to use DAMapping
-                 unless you have another annotation processor declared explicitly -->
-            <!--<annotationProcessors>-->
-              <!--<annotationProcessor>fr.javatronic.damapping.processor.DAAnnotationProcessor</annotationProcessor>-->
-            <!--</annotationProcessors>-->
           </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
+
+
+  <!-- Below is the explicite declaration of DAMapping annotation processor with Java 1.6 or when autodiscovery can not be used -->
+  <!-- note that the syntax is the same for any version of Java-->
+  <!--
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>fr.javatronic.damapping</groupId>
+        <artifactId>annotation-processor</artifactId>
+        <version>${damapping.version}</version>
+        <!- - using provided scope in dependencyManagement allows to delegate the declaration in compile scope
+              to only the module actually using DAMApping - ->
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>fr.javatronic.damapping</groupId>
+      <artifactId>annotation-processor</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.5.1</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+            <encoding>UTF-8</encoding>
+            <annotationProcessors>
+              <annotationProcessor>fr.javatronic.damapping.processor.DAAnnotationProcessor</annotationProcessor>
+            </annotationProcessors>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  -->
 
 </project>

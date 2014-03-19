@@ -13,12 +13,13 @@
   <packaging>jar</packaging>
 
   <dependencies>
-      <!-- declaration of DAMapping annotation processor as a direct dependency is mandatory -->
-      <dependency>
-          <groupId>fr.javatronic.damapping</groupId>
-          <artifactId>annotation-processor</artifactId>
-          <scope>compile</scope>
-      </dependency>
+    <!-- declaration of DAMapping annotation processor as a direct dependency is mandatory -->
+    <dependency>
+      <groupId>fr.javatronic.damapping</groupId>
+      <artifactId>annotation-processor</artifactId>
+      <!-- compile scope must be declared explicitly when using Java 6 or when autodiscovery is disabled -->
+      <!-- <scope>compile</scope> -->
+    </dependency>
   </dependencies>
 
 </project>
