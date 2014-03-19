@@ -13,7 +13,7 @@ Also, modules `moduleA` and `moduleB` declares the root module as their parent P
 
 When project is compiled with Java 1.7 and automatic discovery is possible (see [maven-project](https://github.com/lesaint/damapping-samples/tree/master/maven-project) for details), DAMApping annotations will be automatically processed as long as DAMapping annotation processor artifact is a direct dependency.
 
-To avoid unnecessary annotation processing, it is adviced to avoid declaring the DAMapping annotation processor as a direct dependency of the parent POM, as any module using this parent POM will be compiled with the annotation processor enabled.
+To avoid unnecessary annotation processing, it is advised to avoid declaring the DAMapping annotation processor as a direct dependency of the parent POM, as any module using this parent POM will then be compiled with the annotation processor enabled.
 
 In parent POM, use dependency management to configure the dependency :
 
