@@ -3,4 +3,5 @@ test-output
 
 # IDEA files and directories
 .idea
+*.iml
 out
