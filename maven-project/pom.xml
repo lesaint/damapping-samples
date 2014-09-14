@@ -9,29 +9,48 @@
   <packaging>jar</packaging>
 
   <properties>
-    <damapping.version>0.2.0-SNAPSHOT</damapping.version>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>fr.javatronic.damapping</groupId>
-        <artifactId>annotation-processor</artifactId>
-        <version>${damapping.version}</version>
-        <!-- note that the compile scope is the default scope so following tag is optionnal -->
-        <scope>compile</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <!-- declaration of DAMapping annotation processor as a direct dependency is mandatory -->
     <dependency>
       <groupId>fr.javatronic.damapping</groupId>
-      <artifactId>annotation-processor</artifactId>
+      <artifactId>damapping-annotation-processor</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+      <!-- note that the compile scope is the default scope so following tag is optionnal -->
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>14.0.1</version>
+    </dependency>
+    <!--@Nullable and @Nonnull annotations-->
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+    <!--test dependencies-->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>1.4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -45,8 +64,32 @@
           <configuration>
             <source>1.7</source>
             <target>1.7</target>
-            <encoding>UTF-8</encoding>
+            <compilerArg>
+              <!--option non standard qui permet d'afficher des informations sur le traitement des annotations par les processeurs-->
+              <compilerArg>-XprintRounds</compilerArg>
+              <!--option non standard qui affiche la liste des annotations qui seront traitées par les processeurs d'annotations-->
+              <compilerArg>-XprintProcessorInfo</compilerArg>
+            </compilerArg>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <id>add-generated-sources</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>add-source</goal>
+              </goals>
+              <configuration>
+                <sources>
+                  <source>${basedir}/src/main/generated/java</source>
+                </sources>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
