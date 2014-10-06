@@ -20,6 +20,16 @@
       <!-- compile scope must be declared explicitly when using Java 6 or when autodiscovery is disabled -->
       <!-- <scope>compile</scope> -->
     </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    <!--explicitly add optional dependency of annotation-processor because we are using
+        @Nullable and @Nonnull annotations in this module-->
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
